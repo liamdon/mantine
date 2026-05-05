@@ -5,6 +5,8 @@ import { MantineDemo } from '@mantinex/demo';
 
 const today = dayjs().format('YYYY-MM-DD');
 const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
+const wednesday = dayjs().day(3).format('YYYY-MM-DD');
+const saturday = dayjs().day(6).format('YYYY-MM-DD');
 
 const initialEvents: ScheduleEventData[] = [
   {
@@ -42,6 +44,20 @@ const initialEvents: ScheduleEventData[] = [
     end: `${tomorrow} 16:30:00`,
     color: 'cyan',
   },
+  {
+    id: 6,
+    title: 'Launch Window',
+    start: `${wednesday} 00:00:00`,
+    end: dayjs(wednesday).add(3, 'day').startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+    color: 'pink',
+  },
+  {
+    id: 7,
+    title: 'Weekend Conference',
+    start: `${saturday} 00:00:00`,
+    end: dayjs(saturday).add(2, 'day').startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+    color: 'grape',
+  },
 ];
 
 const code = `
@@ -51,6 +67,8 @@ import { Schedule, ScheduleEventData } from '@mantine/schedule';
 
 const today = dayjs().format('YYYY-MM-DD');
 const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
+const wednesday = dayjs().day(3).format('YYYY-MM-DD');
+const saturday = dayjs().day(6).format('YYYY-MM-DD');
 
 const initialEvents: ScheduleEventData[] = [
   {
@@ -87,6 +105,20 @@ const initialEvents: ScheduleEventData[] = [
     start: \`\${tomorrow} 15:30:00\`,
     end: \`\${tomorrow} 16:30:00\`,
     color: 'cyan',
+  },
+  {
+    id: 6,
+    title: 'Launch Window',
+    start: \`\${wednesday} 00:00:00\`,
+    end: dayjs(wednesday).add(3, 'day').startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+    color: 'pink',
+  },
+  {
+    id: 7,
+    title: 'Weekend Conference',
+    start: \`\${saturday} 00:00:00\`,
+    end: dayjs(saturday).add(2, 'day').startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+    color: 'grape',
   },
 ];
 

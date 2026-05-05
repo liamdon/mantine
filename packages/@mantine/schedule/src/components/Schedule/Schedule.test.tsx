@@ -238,6 +238,45 @@ describe('@mantine/schedule/Schedule', () => {
     expect(event.closest('[draggable="true"]')).toBeInTheDocument();
   });
 
+  it('passes event resize props to month view', () => {
+    const { container } = render(
+      <Schedule
+        date="2024-01-15"
+        view="month"
+        withEventResize
+        events={[
+          {
+            id: 1,
+            title: 'All day event',
+            start: '2024-01-15 00:00:00',
+            end: '2024-01-16 00:00:00',
+            color: 'blue',
+          },
+          {
+            id: 2,
+            title: 'Locked event',
+            start: '2024-01-17 00:00:00',
+            end: '2024-01-18 00:00:00',
+            color: 'gray',
+            payload: { locked: true },
+          },
+        ]}
+        canResizeEvent={(event) => !event.payload?.locked}
+      />
+    );
+
+    const allDayEvent = screen.getByText('All day event').closest('.mantine-ScheduleEvent-event');
+    const lockedEvent = screen.getByText('Locked event').closest('.mantine-ScheduleEvent-event');
+
+    expect(allDayEvent?.querySelectorAll('.mantine-ScheduleEvent-eventResizeHandle')).toHaveLength(
+      2
+    );
+    expect(lockedEvent?.querySelectorAll('.mantine-ScheduleEvent-eventResizeHandle')).toHaveLength(
+      0
+    );
+    expect(container.querySelector('.mantine-MonthView-monthView')).toBeInTheDocument();
+  });
+
   it('supports canDragEvent prop', () => {
     const canDragSpy = jest.fn((event) => event.id !== 1);
 
